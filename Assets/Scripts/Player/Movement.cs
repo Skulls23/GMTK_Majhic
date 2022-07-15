@@ -7,11 +7,16 @@ public class Movement : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float slidingTime;
     private Rigidbody2D rb;
+
     private float horizontal;
     private float vertical;
-    private float verticalSlideTimer;
-    private float horizontalSlideTimer;
 
+    private float horizontalSlideTimer;
+    private float verticalSlideTimer;
+
+    private bool isHorizontalCoroutineRunning = false;
+    private bool isVerticalCoroutineRunning = false;
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -35,7 +40,6 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        print(horizontalSlideTimer);
         VerifySlideValues();
         rb.velocity = new Vector2((1*horizontalSlideTimer) * speed, (1*verticalSlideTimer) * speed);
     }
@@ -51,7 +55,7 @@ public class Movement : MonoBehaviour
         {
             horizontalSlideTimer = -1;
         }
-        else if (horizontal == 0)
+        else if (horizontal == 0 && !isHorizontalCoroutineRunning)
         {
             StartCoroutine(HorizontalSlidingMovement());
         }
@@ -65,7 +69,7 @@ public class Movement : MonoBehaviour
         {
             verticalSlideTimer = -1;
         }
-        else if (vertical == 0)
+        else if (vertical == 0  && !isVerticalCoroutineRunning)
         {
             StartCoroutine(VerticalSlidingMovement());
         }
@@ -73,6 +77,7 @@ public class Movement : MonoBehaviour
 
     public IEnumerator HorizontalSlidingMovement()
     {
+        isHorizontalCoroutineRunning = true;
         while (horizontalSlideTimer != 0)
         {
             if (horizontalSlideTimer < 0)
@@ -83,12 +88,14 @@ public class Movement : MonoBehaviour
             if (horizontalSlideTimer < 0 && horizontalSlideTimer > -0.1 || horizontalSlideTimer > 0 && horizontalSlideTimer < 0.1) //used zhen you move from a direction to another one
                 horizontalSlideTimer = 0;
 
-            yield return new WaitForSeconds(slidingTime/5);
+            yield return new WaitForSeconds(slidingTime/10);
         }
+        isHorizontalCoroutineRunning = false;
     }
 
     public IEnumerator VerticalSlidingMovement()
     {
+        isVerticalCoroutineRunning = true;
         while (verticalSlideTimer != 0)
         {
             if (verticalSlideTimer < 0)
@@ -99,7 +106,8 @@ public class Movement : MonoBehaviour
             if (verticalSlideTimer < 0 && verticalSlideTimer > -0.1 || verticalSlideTimer > 0 && verticalSlideTimer < 0.1) //used zhen you move from a direction to another one
                 verticalSlideTimer = 0;
 
-            yield return new WaitForSeconds(slidingTime/5);
+            yield return new WaitForSeconds(slidingTime/10);
         }
+        isVerticalCoroutineRunning = false;
     }
 }
