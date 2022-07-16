@@ -109,7 +109,6 @@ public class ModifierHandler : MonoBehaviour
 
     public void ChangeUnitStat(ActionModifier actionModifier, string modifierName)
     {
-        Debug.Log("Change unit Stat");
         UnitStats whoToChangeStat = unitStats;
 
         // on récupére la property
@@ -139,7 +138,7 @@ public class ModifierHandler : MonoBehaviour
                     arg2ToFloat = ((float)pi.GetValue(whoToChangeStat) * (arg2ToFloat / 100));
                 }
 
-                Debug.Log("Change stat : "+actionModifier.Arg1+" on : "+whoToChangeStat.gameObject.name);
+                //Debug.Log("Change stat : "+actionModifier.Arg1+" on : "+whoToChangeStat.gameObject.name);
 
                 pi.SetValue(whoToChangeStat, ((float)pi.GetValue(whoToChangeStat) + arg2ToFloat));
             }

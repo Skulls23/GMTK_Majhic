@@ -12,10 +12,15 @@ public class ModifierManager : MonoBehaviour
     public static ModifierManager Instance;
     public List<ModifiersData> enemiesModifierList;
     public List<ModifiersData> playerModifierList;
+    public List<ModifiersData> worldModifiers; // used for unit spawn and stuff like that
 
     void Awake()
     {
         Instance = this;
+    }
+
+    public void Init()
+    {
         UnitsManager.Instance.onUnitDeath += ActionOnUnitDeath;
 
         if(enemiesModifierList == null)
