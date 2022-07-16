@@ -36,8 +36,6 @@ public class GameManager : MonoBehaviour
         // On lance un dé et on attends son résultat
         //lancer le dé et ajouter le résultat aprés le lancement et afficher une popup indiquant le résultat du dé choisis
         dice.Show();
-        dice.Roll();
-
         yield return dice.Roll();
         dice.Hide();
         ModifierManager.Instance.AddModifier(dice.GetCurrentSide());
