@@ -58,4 +58,14 @@ public class Dice : MonoBehaviour
     public ModifiersData GetCurrentSide() {
         return currentSide;
 	}
+
+    public List<ModifiersData> GetAllSides()
+    {
+        return sides;
+    }
+
+    public ModifiersData GetSide(int i)
+    {
+        return sides[i];
+    }
 }

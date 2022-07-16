@@ -5,20 +5,25 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
+    [HideInInspector] public bool isForgeOpen;
+    public Dice dice;
+
     void Awake()
     {
         Instance = this;
     }
 
-    public GameObject forgePanel;
+    public ForgeHandler forgePanel;
     
     public void OpenForgePanel()
     {
-        forgePanel.SetActive(true);
+        forgePanel.Open();
+        isForgeOpen = true;
     }
 
     public void CloseForgePanel()
     {
-        forgePanel.SetActive(false);
+        forgePanel.Close();
+        isForgeOpen = false;
     }
 }

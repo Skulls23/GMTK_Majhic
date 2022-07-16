@@ -14,6 +14,8 @@ using UnityEditor;
     public Sprite modifierVisual;
     public bool replacementPriority; // when used by the dice, this modifier have a great chance of being replaced by another one
 
+    public string modifierDescription;
+
     [Space(10)]
     [Header("Modifier Apply ")]
     public TargetToApply[] targetToApply;

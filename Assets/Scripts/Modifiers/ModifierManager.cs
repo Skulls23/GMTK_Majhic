@@ -9,11 +9,12 @@ using System;
 
 public class ModifierManager : MonoBehaviour
 {
+    [HideInInspector] public ModifiersData currentForgeSelectedModifier; // le dernier modifier acceptable selectionné par le joueur pendant la phase de forge
+
     public static ModifierManager Instance;
     public List<ModifiersData> enemiesModifierList;
     public List<ModifiersData> playerModifierList;
     public List<ModifiersData> worldModifiers; // used for unit spawn and stuff like that
-
     public List<ModifiersData> allModifiersList;
 
     void Awake()
@@ -63,7 +64,7 @@ public class ModifierManager : MonoBehaviour
         return enemiesModifierList;
     }
 
-    public ModifiersData GetARandomModifierFormDatabase()
+    public ModifiersData GetARandomModifierFromDatabase()
     {
         int rnd = Random.Range(0, allModifiersList.Count);
         return allModifiersList[rnd];

@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.OpenForgePanel();
 
         //on attends qu il choisisse le modificateur et ait appuyé sur 'Pret'
-        // yield return new WaitUntil(()=> buttonIsReadyIsPressed);
+        yield return new WaitUntil(()=> !UIManager.Instance.isForgeOpen);
 
         Debug.Log("[Player Choosed Modifier] : Modifier Chosen = ?");
         Debug.Log("[Preparing Next round]");
