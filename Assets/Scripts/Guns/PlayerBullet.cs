@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class PlayerBullet : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
     [SerializeField] private float damage = 1;
@@ -30,10 +30,13 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void ChildTriggered(Collision2D other)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        Vector3 direction = Camera.main.WorldToScreenPoint(other.transform.position) - Camera.main.WorldToScreenPoint(transform.position);
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        if(collision.transform.name == "BulletTrigger")
+        {
+            Vector3 direction = Camera.main.WorldToScreenPoint(collision.transform.position) - Camera.main.WorldToScreenPoint(transform.position);
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
     }
 }

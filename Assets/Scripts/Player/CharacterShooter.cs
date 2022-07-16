@@ -13,7 +13,7 @@ public class CharacterShooter : MonoBehaviour
 
     private void Awake()
     {
-        bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
+        bulletPrefab = Resources.Load<GameObject>("Prefabs/Player Bullet");
         characterAimingScript = GetComponent<CharacterAiming>();
         unitStats = GetComponent<UnitStats>();
     }
@@ -22,6 +22,7 @@ public class CharacterShooter : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && timeUntilNextShot < Time.time)
         {
+            print("shoot");
             Shoot();
             timeUntilNextShot = Time.time + unitStats.CurrentNbSecondsBetweenEachAtk;
         }

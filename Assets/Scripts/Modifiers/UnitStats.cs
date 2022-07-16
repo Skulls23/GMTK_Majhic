@@ -55,7 +55,7 @@ public class UnitStats : MonoBehaviour
 
     #endregion
     #region Weapon speed
-    public float startingNbAtkPerSecond;
+    public float startingDelayBetweenAtk;
     private float _nbSecondsBetweenEachAtkBonusFlat = 0.0f;
     public float NbSecondsBetweenEachAtkBonusFlat
     {
@@ -76,7 +76,7 @@ public class UnitStats : MonoBehaviour
     {
         get
         {
-            return (float)((startingNbAtkPerSecond + NbSecondsBetweenEachAtkBonusFlat) * NbSecondsBetweenEachAtkBonusPercent);
+            return (float)((startingDelayBetweenAtk + NbSecondsBetweenEachAtkBonusFlat) * NbSecondsBetweenEachAtkBonusPercent);
         }
     }
     #endregion
