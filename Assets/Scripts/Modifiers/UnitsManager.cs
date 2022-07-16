@@ -12,6 +12,8 @@ public class UnitsManager : MonoBehaviour
 
     public List<GameObject> enemyToCreateEachWave;
     public int amountOfRemainingEnemy;
+    public Transform enemyParent;
+
 
     void Awake()
     {
@@ -36,6 +38,29 @@ public class UnitsManager : MonoBehaviour
 
     void CreateEnemies()
     {
+        List<ModifiersData> modifiers = ModifierManager.Instance.GetAllWorldModifier().FindAll(x=>x.upgradeManifestation == ModifiersData.UpgradeManifestation.OnCreated);
+        foreach(ModifiersData mod in modifiers)
+        {
+            CreateEnemy(mod);
+        }
+    }
 
+    void CreateEnemy(ModifiersData mod)
+    {
+        foreach(ActionModifier action in mod.actionModifierList)
+        {
+            if(action.action == ActionModifier.Action.Create)
+            {   
+                Transform tf = GetRandomSpawner();
+                GameObject go = Instantiate(mod.objectToCreatePrefab[0], tf.position, Quaternion.identity);
+                go.transform.SetParent(enemyParent);
+                amountOfRemainingEnemy ++;
+            }
+        }
+    }
+
+    Transform GetRandomSpawner()
+    {
+        return transform;
     }
 }

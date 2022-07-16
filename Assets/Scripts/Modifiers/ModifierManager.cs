@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using Debug=UnityEngine.Debug;
-using Random=UnityEngine.Random;
+using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 using System;
 
 public class ModifierManager : MonoBehaviour
@@ -26,11 +26,14 @@ public class ModifierManager : MonoBehaviour
     {
         UnitsManager.Instance.onUnitDeath += ActionOnUnitDeath;
 
-        if(enemiesModifierList == null)
+        if (enemiesModifierList == null)
             enemiesModifierList = new List<ModifiersData>();
 
-        if(playerModifierList == null)
+        if (playerModifierList == null)
             playerModifierList = new List<ModifiersData>();
+
+        if (worldModifiers == null)
+            worldModifiers = new List<ModifiersData>();
     }
 
     private void ActionOnUnitDeath(/*UnitHandler unitDead*/)
@@ -38,11 +41,13 @@ public class ModifierManager : MonoBehaviour
         // on stuff when a unit die
     }
 
-    public void AddModifier(ModifiersData mod) {
+    public void AddModifier(ModifiersData mod)
+    {
         if (mod.targetToApply.Contains(ModifiersData.TargetToApply.Player)) AddPlayerModifier(mod);
         if (mod.targetToApply.Contains(ModifiersData.TargetToApply.Enemy)) AddEnemiesModifier(mod);
+        if (mod.targetToApply.Contains(ModifiersData.TargetToApply.None)) AddWorldModifier(mod);
         if (mod.targetToApply.Contains(ModifiersData.TargetToApply.Enemy)) throw new Exception("Global Modifiers not implemented");
-	}
+    }
 
     public void AddPlayerModifier(ModifiersData mod)
     {
@@ -54,6 +59,11 @@ public class ModifierManager : MonoBehaviour
         enemiesModifierList.Add(mod);
     }
 
+    public void AddWorldModifier(ModifiersData mod)
+    {
+        worldModifiers.Add(mod);
+    }
+
     public List<ModifiersData> GetAllPlayerModifier()
     {
         return playerModifierList;
@@ -62,6 +72,11 @@ public class ModifierManager : MonoBehaviour
     public List<ModifiersData> GetAllEnemiesModifier()
     {
         return enemiesModifierList;
+    }
+
+    public List<ModifiersData> GetAllWorldModifier()
+    {
+        return worldModifiers;
     }
 
     public ModifiersData GetARandomModifierFromDatabase()
@@ -75,5 +90,5 @@ public class ModifierManager : MonoBehaviour
         enemiesModifierList.Clear();
         playerModifierList.Clear();
     }
-    
+
 }
