@@ -29,7 +29,6 @@ public class CharacterShooter : MonoBehaviour
     private void Shoot()
     {
         float angle = characterAimingScript.Angle;
-        print(angle);
         Instantiate(bulletPrefab, firingPoint.position, Quaternion.Euler(new Vector3(0, 0, angle)));
     }
 }
