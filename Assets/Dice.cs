@@ -19,11 +19,11 @@ public class Dice : MonoBehaviour
 
         sides = new List<DiceSide>();
         for (int i = 0; i < 6; ++i) {
-            sides.Add(new DiceSide("DiceSideBlank", "NO DESCRIPTION"));
+            sides.Add(new DiceSide("DiceSideBlank", "Blank", "NO DESCRIPTION"));
 		}
 
         for(int i = 0; i < 6; ++i) {
-            SetSide(i, new DiceSide("DiceSide" + (i + 1), "NO DESCRIPTION"));
+            SetSide(i, new DiceSide("DiceSide" + (i + 1), (i+1).ToString(), "NO DESCRIPTION"));
 		}
         Roll();
     }
