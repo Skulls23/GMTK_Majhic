@@ -27,7 +27,7 @@ public class EnemyMovement : MonoBehaviour
             switch (enemyCode)
             {
                 case "Agressive1": //go straight forward, bounce on walls | shoot towards the player
-                    Agressive2();
+                    Agressive1();
                     break;
                 case "Agressive2": //go toward the player
                     break;
@@ -67,7 +67,7 @@ public class EnemyMovement : MonoBehaviour
         
     }
 
-    private void Agressive2()
+    private void Agressive1()
     {
         rb.velocity = transform.right * unitStats.MaximumMoveSpeed;
     }
