@@ -19,11 +19,11 @@ public class EnemyBullet : MonoBehaviour
         rb.velocity = transform.right * speed;
     }
 
-    /*private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag != "Enemy")
+        if (collision.collider.tag == "Player" || collision.collider.tag == "Bullet")
             Destroy(gameObject);
-    }*/
+    }
 
     private void OnBecameInvisible()
     {

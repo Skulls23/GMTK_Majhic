@@ -21,7 +21,7 @@ public class PlayerBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag != "Player")
+        if (collision.collider.tag == "Enemy" || collision.collider.tag == "Bullet")
             Destroy(gameObject);
     }
 
