@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class UnitsManager : MonoBehaviour
 {
-    public int maxEnemyAmountOnScreen;
     public static UnitsManager Instance;
+
+    public int maxEnemyAmountOnScreen;
     public delegate void OnUnitDeath();
     public OnUnitDeath onUnitDeath;
 
@@ -15,6 +16,10 @@ public class UnitsManager : MonoBehaviour
     void Awake()
     {
         Instance = this;   
+    }
+
+    public void Init()
+    {
         enemyToCreateEachWave = new List<GameObject>();
     }
 

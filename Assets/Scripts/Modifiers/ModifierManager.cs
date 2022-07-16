@@ -16,6 +16,10 @@ public class ModifierManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+    }
+
+    public void Init()
+    {
         UnitsManager.Instance.onUnitDeath += ActionOnUnitDeath;
 
         if(enemiesModifierList == null)
