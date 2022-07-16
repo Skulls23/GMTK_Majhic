@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private float slidingTime;
+    [SerializeField] private float speed = 15f;
+    [SerializeField] private float slidingTime = 0.5f;
     private Rigidbody2D rb;
 
     private float horizontal;
@@ -28,7 +28,6 @@ public class CharacterMovement : MonoBehaviour
         vertical   = Input.GetAxisRaw("Vertical");   // 1 = up    | -1 = down
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         VerifySlideValues();
