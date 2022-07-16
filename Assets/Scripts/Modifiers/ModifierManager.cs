@@ -14,6 +14,8 @@ public class ModifierManager : MonoBehaviour
     public List<ModifiersData> playerModifierList;
     public List<ModifiersData> worldModifiers; // used for unit spawn and stuff like that
 
+    public List<ModifiersData> allModifiersList;
+
     void Awake()
     {
         Instance = this;
@@ -55,9 +57,16 @@ public class ModifierManager : MonoBehaviour
         return enemiesModifierList;
     }
 
+    public ModifiersData GetARandomModifierFormDatabase()
+    {
+        int rnd = Random.Range(0, allModifiersList.Count);
+        return allModifiersList[rnd];
+    }
+
     public void ResetUpgradeManager()
     {
         enemiesModifierList.Clear();
         playerModifierList.Clear();
     }
+    
 }

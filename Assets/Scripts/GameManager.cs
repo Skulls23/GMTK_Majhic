@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("[Choose Modifier Phase]");
 
         // on display au joueur les modificateurs à choisir
+        UIManager.Instance.OpenForgePanel();
 
         //on attends qu il choisisse le modificateur et ait appuyé sur 'Pret'
         // yield return new WaitUntil(()=> buttonIsReadyIsPressed);
