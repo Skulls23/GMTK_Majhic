@@ -30,6 +30,12 @@ public class UnitsManager : MonoBehaviour
 
     public void StartWave()
     {
+        CreateEnemies();
+
+    }
+
+    void CreateEnemies()
+    {
 
     }
 }

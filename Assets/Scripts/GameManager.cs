@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartARound());
     }
 
-
     IEnumerator StartARound()
     {
         Debug.Log("[Start a Round] :: Round " + currentRound);
@@ -34,13 +33,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("[Launch Dice]");
 
         // On lance un dé et on attends son résultat
-        //lancer le dé
+        //lancer le dé et ajouter le résultat aprés le lancement et afficher une popup indiquant le résultat du dé choisis
 
         //yield return new WaitUntil(() => bool), avec bool quand le jeu a tiré le modifier et montré au joueur (une sorte de isReady)
         Debug.Log("[End launch Dice] : Res = ?"); // dice results
 
         Debug.Log("[Prepare Battle phase]");
-
         // Rétablir la scéne et le controle du personnage au joueur
 
         //on attends 2-3 secondes avant d'envoyer la sauce
@@ -48,6 +46,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         Debug.Log("[Start Battle phase]");
+        //invoquer les ennemies
+        UnitsManager.Instance.StartWave();
 
         //on attends que le joueur ait tué tous les ennemis
         yield return new WaitUntil(() => UnitsManager.Instance.amountOfRemainingEnemy <= 0);
