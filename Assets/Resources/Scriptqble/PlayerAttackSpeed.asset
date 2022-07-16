@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modifierDisplayName: PlayerAttack Speed
   numberOfWaveBeforeSpawning: 0
-  modifierVisual: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  modifierVisual: {fileID: 21300000, guid: fd8db058a5e711742be4ccb739106ee9, type: 3}
   replacementPriority: 0
   targetToApply: 00000000
   upgradeManifestation: 0

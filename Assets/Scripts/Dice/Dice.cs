@@ -12,8 +12,6 @@ public class Dice : MonoBehaviour
 
     private ModifiersData currentSide;
 
-    private bool isRolling;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +24,6 @@ public class Dice : MonoBehaviour
             else
                 sides.Add(Resources.Load<ModifiersData>("Scriptqble/TestModifier"));
 		}
-        isRolling = false;
-        Roll();
     }
 
     /// <summary>
@@ -39,23 +35,27 @@ public class Dice : MonoBehaviour
         sides[index] = side;
 	}
 
-	public void Roll() {
-        StartCoroutine(RollDiceCoroutine());
-	}
-
-    private IEnumerator RollDiceCoroutine() {
-        isRolling = true;
+	public IEnumerator Roll() {
         for (int i = 0; i < rollAmount; ++i) {
-            currentSide = sides[Random.Range(1, 6)];
-            spriteRenderer.sprite = currentSide.modifierVisual;
+            SetActiveSide(Random.Range(0, 6));
             yield return new WaitForSeconds(rollInterval);
         }
-        ModifierManager.Instance.AddModifier(currentSide);
-        Debug.Log("DICE RESULT IS : " + currentSide.modifierDisplayName);
-        isRolling = false;
 	}
 
-    public bool GetIsRolling() {
-        return isRolling;
+    private void SetActiveSide(int index) {
+        currentSide = sides[index];
+        spriteRenderer.sprite = currentSide.modifierVisual;
+    }
+
+    public void Show () {
+        spriteRenderer.enabled = true;
+	}
+
+    public void Hide() {
+        spriteRenderer.enabled = false;
+	}
+
+    public ModifiersData GetCurrentSide() {
+        return currentSide;
 	}
 }

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc690f29ff5e0df44a86f799c6b8e39b, type: 3}
   m_Name: TestModifier
   m_EditorClassIdentifier: 
-  modifierDisplayName: 
+  modifierDisplayName: TestModifier
   numberOfWaveBeforeSpawning: 0
-  modifierVisual: {fileID: 0}
+  modifierVisual: {fileID: 21300000, guid: 72e462b6197beba4eb597d286673bd73, type: 3}
   replacementPriority: 0
-  targetToApply: 
+  targetToApply: 00000000
   upgradeManifestation: 0
   objectToCreatePrefab: []
   actionModifierList: []

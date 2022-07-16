@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject countDown;
     public TextMeshProUGUI countDownText;
     private int currentRound = 1;
+    public Dice dice;
 
     void Awake()
     {
@@ -34,9 +35,13 @@ public class GameManager : MonoBehaviour
 
         // On lance un dé et on attends son résultat
         //lancer le dé et ajouter le résultat aprés le lancement et afficher une popup indiquant le résultat du dé choisis
+        dice.Show();
+        dice.Roll();
 
-        //yield return new WaitUntil(() => bool), avec bool quand le jeu a tiré le modifier et montré au joueur (une sorte de isReady)
-        Debug.Log("[End launch Dice] : Res = ?"); // dice results
+        yield return dice.Roll();
+        dice.Hide();
+        ModifierManager.Instance.AddModifier(dice.GetCurrentSide());
+        Debug.Log("[End launch Dice] : Res = " + dice.GetCurrentSide().name); // dice results
 
         Debug.Log("[Prepare Battle phase]");
         // Rétablir la scéne et le controle du personnage au joueur
