@@ -40,16 +40,18 @@ public class CharacterMovement : MonoBehaviour
         else
         {
             rb.velocity = Vector3.zero;
-            if(screenPos.x >= Screen.width)
+            if (screenPos.x >= Screen.width)
                 transform.position = new Vector3(transform.position.x - 0.05f, transform.position.y, 0);
             else if (screenPos.x <= 0)
                 transform.position = new Vector3(transform.position.x + 0.05f, transform.position.y, 0);
             else if (screenPos.y >= Screen.height)
                 transform.position = new Vector3(transform.position.x, transform.position.y - 0.05f, 0);
             else if (screenPos.y >= 0)
+            {
+                print("here");
                 transform.position = new Vector3(transform.position.x, transform.position.y + 0.05f, 0);
+            }
         }
-
     }
 
     public void VerifySlideValues()

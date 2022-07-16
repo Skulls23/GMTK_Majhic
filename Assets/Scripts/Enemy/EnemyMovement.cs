@@ -30,6 +30,7 @@ public class EnemyMovement : MonoBehaviour
                     Agressive1();
                     break;
                 case "Agressive2": //go toward the player
+                    Agressive2();
                     break;
                 case "Agressive3": //Do the same moves as the player      | shoot towards the player
                     break;
@@ -37,19 +38,19 @@ public class EnemyMovement : MonoBehaviour
                     break;
                 case "Agressive5": //Randomly moves
                     break;
-                case "Passive1": //Do nothing
+                case "Passive1"  : //Do nothing
                     break;
-                case "Passive2": //Slowly move randomly
+                case "Passive2"  : //Slowly move randomly
                     break;
-                case "Passive3": //Try to be on Player's path
+                case "Passive3"  : //Try to be on Player's path
                     break;
-                case "Passive4": //Move on X or Y axis only
+                case "Passive4"  : //Move on X or Y axis only
                     break;
             }
         }
         else if (enemyCode == "Agressive1")
         {
-            print("here");
+            print("Here will be the bouncing effet");
             rb.velocity = Vector3.zero;
         }
         else
@@ -69,6 +70,12 @@ public class EnemyMovement : MonoBehaviour
 
     private void Agressive1()
     {
+        rb.velocity = transform.right * unitStats.MaximumMoveSpeed;
+    }
+
+    private void Agressive2()
+    {
+        RotateTowardTarget(player);
         rb.velocity = transform.right * unitStats.MaximumMoveSpeed;
     }
 
