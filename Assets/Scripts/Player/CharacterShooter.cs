@@ -19,7 +19,7 @@ public class CharacterShooter : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButton(0) && timeUntilNextShot < Time.time)
+        if (Input.GetMouseButton(0) && timeUntilNextShot < Time.time)
         {
             Shoot();
             timeUntilNextShot = Time.time + fireRate;

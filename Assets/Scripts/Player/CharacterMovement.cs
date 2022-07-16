@@ -31,40 +31,46 @@ public class CharacterMovement : MonoBehaviour
     void FixedUpdate()
     {
         VerifySlideValues();
-        rb.velocity = new Vector2(1 * horizontalSlideTimer * speed, 1 * verticalSlideTimer * speed);
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+
+        print(screenPos);
+        //Player can't go outside camera
+        if (screenPos.x < Screen.width && screenPos.x > 0 && screenPos.y < Screen.height && screenPos.y > 0)
+            rb.velocity = new Vector2(1 * horizontalSlideTimer * speed, 1 * verticalSlideTimer * speed);
+        else
+        {
+            rb.velocity = Vector3.zero;
+            if(screenPos.x >= Screen.width)
+                transform.position = new Vector3(transform.position.x - 0.05f, transform.position.y, 0);
+            else if (screenPos.x <= 0)
+                transform.position = new Vector3(transform.position.x + 0.05f, transform.position.y, 0);
+            else if (screenPos.y >= Screen.height)
+                transform.position = new Vector3(transform.position.x, transform.position.y - 0.05f, 0);
+            else if (screenPos.y >= 0)
+                transform.position = new Vector3(transform.position.x, transform.position.y + 0.05f, 0);
+        }
+          
+            
+
     }
 
     public void VerifySlideValues()
     {
         //Horizontal Sliding
         if (horizontalSlideTimer != 1 && horizontal == 1)
-        {
             horizontalSlideTimer = 1;
-        }
         else if (horizontalSlideTimer != 1 && horizontal == -1)
-        {
             horizontalSlideTimer = -1;
-        }
         else if (horizontal == 0 && horizontalSlideTimer != 0 && !isHorizontalCoroutineRunning)
-        {
-            print("here");
             StartCoroutine(HorizontalSlidingMovement());
-        }
 
         //Vertical Sliding
         if (verticalSlideTimer != 1 && vertical == 1)
-        {
             verticalSlideTimer = 1;
-        }
         else if (verticalSlideTimer != 1 && vertical == -1)
-        {
             verticalSlideTimer = -1;
-        }
         else if (vertical == 0 && verticalSlideTimer != 0 &&!isVerticalCoroutineRunning)
-        {
-            print("here2");
             StartCoroutine(VerticalSlidingMovement());
-        }
     }
 
     public IEnumerator HorizontalSlidingMovement()
