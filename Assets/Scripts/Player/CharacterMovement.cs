@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 15f;
     [SerializeField] private float slidingTime = 0.5f;
     private Rigidbody2D rb;
+    private UnitStats unitStats;
 
     private float horizontal;
     private float vertical;
@@ -20,6 +20,7 @@ public class CharacterMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        unitStats = GetComponent<UnitStats>();
     }
 
     private void Update()
@@ -35,7 +36,7 @@ public class CharacterMovement : MonoBehaviour
 
         //Player can't go outside camera
         if (screenPos.x < Screen.width && screenPos.x > 0 && screenPos.y < Screen.height && screenPos.y > 0)
-            rb.velocity = new Vector2(1 * horizontalSlideTimer * speed, 1 * verticalSlideTimer * speed);
+            rb.velocity = new Vector2(1 * horizontalSlideTimer * unitStats.MaximumMoveSpeed, 1 * verticalSlideTimer * unitStats.MaximumMoveSpeed);
         else
         {
             rb.velocity = Vector3.zero;
@@ -109,12 +110,7 @@ public class CharacterMovement : MonoBehaviour
     /////////////////////////
     /// GETTERS & SETTERS ///
     /////////////////////////
-    
-    public float Speed
-    {
-        get { return speed; }
-        set { speed = value; }
-    }
+
 
     public float SlidingTime
     {

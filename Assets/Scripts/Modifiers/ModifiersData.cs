@@ -5,7 +5,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEditor;
 
-[CreateAssetMenu(fileName = "New modifiers", menuName = "ScriptableObjects")]
+[CreateAssetMenu(fileName = "New modifiers", menuName = "Modifier")]
 [SerializeField] public class ModifiersData : ScriptableObject
 {
     [Header("Modifiers global info")]

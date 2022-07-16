@@ -10,8 +10,8 @@ using System;
 public class ModifierManager : MonoBehaviour
 {
     public static ModifierManager Instance;
-    private List<ModifiersData> enemiesModifierList;
-    private List<ModifiersData> playerModifierList;
+    public List<ModifiersData> enemiesModifierList;
+    public List<ModifiersData> playerModifierList;
 
     void Awake()
     {

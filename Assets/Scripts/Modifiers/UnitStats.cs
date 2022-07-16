@@ -4,20 +4,8 @@ using UnityEngine;
 
 public class UnitStats : MonoBehaviour
 {
-    private int _hp;
-    private float _attackSpeed;
-    private int _amountOfBullet;
-    private float _movementSpeed;
-
     #region Hitpoints health
     public int startingHitPoint;
-    private int _currentHitPoint;
-    public int CurrentHitPoint
-    {
-        get => _currentHitPoint;
-        set => _currentHitPoint = value;
-    }
-
     private int _hitPointBonusFlat;
     public int HitPointBonusFlat
     {
@@ -43,14 +31,8 @@ public class UnitStats : MonoBehaviour
     #endregion
     #region Movement speed
     public float startingMoveSpeed;
-    private float _currentMoveSpeed;
-    public float CurrentMoveSpeed
-    {
-        get => _currentMoveSpeed;
-        set => _currentMoveSpeed = value;
-    }
-    private float _moveSpeedBonusFlat;
 
+    private float _moveSpeedBonusFlat;
     public float MoveSpeedBonusFlat
     {
         get => _moveSpeedBonusFlat;
@@ -75,7 +57,7 @@ public class UnitStats : MonoBehaviour
     #region Weapon speed
     public float startingNbAtkPerSecond;
     private float _nbAtkPerSecondBonusFlat = 0.0f;
-    public float NbAtkPerSecondBonus
+    public float NbAtkPerSecondBonusFlat
     {
         get { return _nbAtkPerSecondBonusFlat; }
         set { _nbAtkPerSecondBonusFlat = value; }
@@ -94,17 +76,18 @@ public class UnitStats : MonoBehaviour
     {
         get
         {
-            return (float)((startingNbAtkPerSecond + NbAtkPerSecondBonus) * NbAtkPerSecondBonusPercent);
+            return (float)((startingNbAtkPerSecond + NbAtkPerSecondBonusFlat) * NbAtkPerSecondBonusPercent);
         }
     }
     #endregion
 
     public delegate void OnCreated();
     public OnCreated onCreated;
-
     public delegate void OnDeath();
     public OnDeath onDeath;
 
     public delegate void OnTakeDamage(int amount, Vector3 attackPos);
     public OnTakeDamage onTakeDamage;
+    public delegate void OnShoot();
+    public OnShoot onShoot;
 }

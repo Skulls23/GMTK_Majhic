@@ -11,7 +11,7 @@ public class ModifierHandler : MonoBehaviour
 
     public ModifiersData.TargetToApply team;
 
-    public void SetupUpgrade()
+    void Start()
     {
         unitStats = GetComponent<UnitStats>();
         modifiersToApply = new List<ModifiersData>();
@@ -26,6 +26,9 @@ public class ModifierHandler : MonoBehaviour
             modifiersToApply = ModifierManager.Instance.GetAllEnemiesModifier();
             Subscription();
         }
+
+        if(unitStats != null)
+            unitStats.onCreated();
     }
 
     public void Subscription()
@@ -33,10 +36,12 @@ public class ModifierHandler : MonoBehaviour
         unitStats.onCreated -= ActionOnCreation;
         unitStats.onDeath -= ActionOnBeingDead;
         unitStats.onTakeDamage -= ActionOnBeingHit;
+        unitStats.onShoot -= ActionOnBulletShoot;
 
         unitStats.onCreated += ActionOnCreation;
         unitStats.onDeath += ActionOnBeingDead;
         unitStats.onTakeDamage += ActionOnBeingHit;
+        unitStats.onShoot += ActionOnBulletShoot;
     }
 
     public void ActionOnCreation()
@@ -51,9 +56,9 @@ public class ModifierHandler : MonoBehaviour
         }
     }
 
-    public List<ModifiersData> GetActionOnBulletShoot()
+    public void ActionOnBulletShoot(/*bullet shot*/)
     {
-        return modifiersToApply.FindAll(x => x.upgradeManifestation == ModifiersData.UpgradeManifestation.OnAddEffetOnBullet);
+        // a faire
     }
 
     public void ActionOnBeingDead()
@@ -104,6 +109,7 @@ public class ModifierHandler : MonoBehaviour
 
     public void ChangeUnitStat(ActionModifier actionModifier, string modifierName)
     {
+        Debug.Log("Change unit Stat");
         UnitStats whoToChangeStat = unitStats;
 
         // on récupére la property
@@ -132,6 +138,8 @@ public class ModifierHandler : MonoBehaviour
                     // formule du pourcentage : x - 10% => x * (1.0 + -10/100)
                     arg2ToFloat = ((float)pi.GetValue(whoToChangeStat) * (arg2ToFloat / 100));
                 }
+
+                Debug.Log("Change stat : "+actionModifier.Arg1+" on : "+whoToChangeStat.gameObject.name);
 
                 pi.SetValue(whoToChangeStat, ((float)pi.GetValue(whoToChangeStat) + arg2ToFloat));
             }
