@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc690f29ff5e0df44a86f799c6b8e39b, type: 3}
-  m_Name: PlayerAttackSpeed
+  m_Name: PlayerHealthIncrease
   m_EditorClassIdentifier: 
-  modifierDisplayName: PlayerAttack Speed
+  modifierDisplayName: Health (Small Serving)
   numberOfWaveBeforeSpawning: 0
-  modifierVisual: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  modifierVisual: {fileID: 0}
   replacementPriority: 0
   targetToApply: 00000000
   upgradeManifestation: 0
   objectToCreatePrefab: []
   actionModifierList:
   - action: 1
-    Arg1: MoveSpeedBonusFlat
-    Arg2: -10
+    Arg1: HitPointBonusFlat
+    Arg2: 1
     Arg3: 
     Arg4: 
