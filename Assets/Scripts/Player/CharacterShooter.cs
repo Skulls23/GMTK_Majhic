@@ -22,7 +22,6 @@ public class CharacterShooter : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && timeUntilNextShot < Time.time)
         {
-            print("shoot");
             Shoot();
             timeUntilNextShot = Time.time + unitStats.CurrentNbSecondsBetweenEachAtk;
         }

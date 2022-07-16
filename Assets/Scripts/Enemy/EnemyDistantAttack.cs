@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class EnemyDistantAttack : MonoBehaviour
 {
-    [SerializeField] private GameObject target;
+    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject firingPoint;
     [SerializeField] private float      distanceMaxToAttack;
-    [SerializeField] private Transform  firingPoint;
 
     private UnitStats  unitStats;
     private GameObject bulletPrefab;
     private float      timeUntilNextShot;
-    private float      angle;
 
     private void Awake()
     {
@@ -19,16 +18,9 @@ public class EnemyDistantAttack : MonoBehaviour
         unitStats = GetComponent<UnitStats>();
     }
 
-    private void FixedUpdate()
-    {
-        Vector3 direction = Camera.main.WorldToScreenPoint(target.transform.position) - Camera.main.WorldToScreenPoint(transform.position);
-        angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-    }
-
     private void Update()
     {
-        if (Vector3.Distance(transform.position, target.transform.position) < distanceMaxToAttack && timeUntilNextShot < Time.time)
+        if (Vector3.Distance(transform.position, player.transform.position) < distanceMaxToAttack && timeUntilNextShot < Time.time)
         {
             Shoot();
             timeUntilNextShot = Time.time + unitStats.CurrentNbSecondsBetweenEachAtk;
@@ -40,6 +32,9 @@ public class EnemyDistantAttack : MonoBehaviour
         if (unitStats.onShoot != null)
             unitStats.onShoot();
 
-        Instantiate(bulletPrefab, firingPoint.position, Quaternion.Euler(new Vector3(0, 0, angle)));
+        Vector3 direction = Camera.main.WorldToScreenPoint(player.transform.position) - Camera.main.WorldToScreenPoint(transform.position);
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        Instantiate(bulletPrefab, firingPoint.transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
     }
 }

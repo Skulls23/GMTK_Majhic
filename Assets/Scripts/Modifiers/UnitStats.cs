@@ -5,7 +5,7 @@ using UnityEngine;
 public class UnitStats : MonoBehaviour
 {
     #region Hitpoints health
-    public int startingHitPoint;
+    public int startingHitPoint = 3;
     private int _hitPointBonusFlat;
     public int HitPointBonusFlat
     {
@@ -30,7 +30,7 @@ public class UnitStats : MonoBehaviour
 
     #endregion
     #region Movement speed
-    public float startingMoveSpeed;
+    public float startingMoveSpeed = 15f;
 
     private float _moveSpeedBonusFlat;
     public float MoveSpeedBonusFlat
@@ -55,7 +55,7 @@ public class UnitStats : MonoBehaviour
 
     #endregion
     #region Weapon speed
-    public float startingDelayBetweenAtk;
+    public float startingDelayBetweenAtk = 0.5f;
     private float _nbSecondsBetweenEachAtkBonusFlat = 0.0f;
     public float NbSecondsBetweenEachAtkBonusFlat
     {
