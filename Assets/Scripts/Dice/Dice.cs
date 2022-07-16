@@ -28,12 +28,13 @@ public class Dice : MonoBehaviour
         Roll();
     }
 
+    /// <summary>
+    /// Overrides one of the 6 dice sides to a new one
+    /// </summary>
+    /// <param name="index">The side to override</param>
+    /// <param name="side">The new side</param>
     public void SetSide(int index, DiceSide side) {
         sides[index] = side;
-	}
-
-	private void Update() {
-		
 	}
 
 	void Roll() {
