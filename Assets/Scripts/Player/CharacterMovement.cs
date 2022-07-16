@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float slidingTime;
@@ -22,26 +22,17 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     private void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal"); // 1 = right | -1 = left
         vertical   = Input.GetAxisRaw("Vertical");   // 1 = up    | -1 = down
     }
 
-    
-
     // Update is called once per frame
     void FixedUpdate()
     {
         VerifySlideValues();
-        rb.velocity = new Vector2((1*horizontalSlideTimer) * speed, (1*verticalSlideTimer) * speed);
+        rb.velocity = new Vector2(1 * horizontalSlideTimer * speed, 1 * verticalSlideTimer * speed);
     }
 
     public void VerifySlideValues()
@@ -55,8 +46,9 @@ public class Movement : MonoBehaviour
         {
             horizontalSlideTimer = -1;
         }
-        else if (horizontal == 0 && !isHorizontalCoroutineRunning)
+        else if (horizontal == 0 && horizontalSlideTimer != 0 && !isHorizontalCoroutineRunning)
         {
+            print("here");
             StartCoroutine(HorizontalSlidingMovement());
         }
 
@@ -69,8 +61,9 @@ public class Movement : MonoBehaviour
         {
             verticalSlideTimer = -1;
         }
-        else if (vertical == 0  && !isVerticalCoroutineRunning)
+        else if (vertical == 0 && verticalSlideTimer != 0 &&!isVerticalCoroutineRunning)
         {
+            print("here2");
             StartCoroutine(VerticalSlidingMovement());
         }
     }
