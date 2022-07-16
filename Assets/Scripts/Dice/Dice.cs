@@ -52,7 +52,7 @@ public class Dice : MonoBehaviour
     private void SetActiveSide(int index) {
         currentSide = sides[index];
         spriteRenderer.sprite = currentSide.modifierVisual;
-        description.text = currentSide.name;
+        description.text = currentSide.modifierDescription;
     }
 
     public void Hide() {
