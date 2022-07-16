@@ -111,7 +111,6 @@ public class CharacterMovement : MonoBehaviour
     /// GETTERS & SETTERS ///
     /////////////////////////
 
-
     public float SlidingTime
     {
         get { return slidingTime; }

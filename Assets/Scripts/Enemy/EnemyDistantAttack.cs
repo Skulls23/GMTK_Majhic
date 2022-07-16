@@ -2,19 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterShooter : MonoBehaviour
+public class EnemyDistantAttack : MonoBehaviour
 {
-    [SerializeField] private Transform firingPoint;
-
-    private CharacterAiming characterAimingScript;
+    [SerializeField] private GameObject target;
+    private UnitStats  unitStats;
     private GameObject bulletPrefab;
     private float timeUntilNextShot;
-    private UnitStats unitStats;
 
     private void Awake()
     {
         bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
-        characterAimingScript = GetComponent<CharacterAiming>();
         unitStats = GetComponent<UnitStats>();
     }
 
@@ -29,11 +26,11 @@ public class CharacterShooter : MonoBehaviour
 
     private void Shoot()
     {
-        float angle = characterAimingScript.Angle;
+        /*float angle = characterAimingScript.Angle;
 
-        if(unitStats.onShoot != null)
+        if (unitStats.onShoot != null)
             unitStats.onShoot();
-            
-        Instantiate(bulletPrefab, firingPoint.position, Quaternion.Euler(new Vector3(0, 0, angle)));
+
+        Instantiate(bulletPrefab, firingPoint.position, Quaternion.Euler(new Vector3(0, 0, angle)));*/
     }
 }

@@ -30,10 +30,10 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Redirect(Vector3 newDirection)
+    public void ChildTriggered(Collision2D other)
     {
-        Vector3 direction = newDirection - Camera.main.WorldToScreenPoint(transform.position);
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+        Vector3 direction = Camera.main.WorldToScreenPoint(other.transform.position) - Camera.main.WorldToScreenPoint(transform.position);
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 }
