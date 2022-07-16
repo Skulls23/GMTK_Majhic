@@ -33,7 +33,6 @@ public class CharacterMovement : MonoBehaviour
         VerifySlideValues();
         Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
 
-        print(screenPos);
         //Player can't go outside camera
         if (screenPos.x < Screen.width && screenPos.x > 0 && screenPos.y < Screen.height && screenPos.y > 0)
             rb.velocity = new Vector2(1 * horizontalSlideTimer * speed, 1 * verticalSlideTimer * speed);
@@ -49,8 +48,6 @@ public class CharacterMovement : MonoBehaviour
             else if (screenPos.y >= 0)
                 transform.position = new Vector3(transform.position.x, transform.position.y + 0.05f, 0);
         }
-          
-            
 
     }
 
