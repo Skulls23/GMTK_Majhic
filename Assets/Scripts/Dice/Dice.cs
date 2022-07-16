@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Dice : MonoBehaviour
 {
@@ -8,14 +9,18 @@ public class Dice : MonoBehaviour
     private static float rollAmount = 10;
 
     private List<ModifiersData> sides;
-    private SpriteRenderer spriteRenderer;
+    private Image spriteRenderer;
+    private Text description;
 
     private ModifiersData currentSide;
 
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = transform.Find("Image").GetComponent<Image>();
+        description = transform.Find("Description").GetComponent<Text>();
+
+        Hide();
 
         sides = new List<ModifiersData>();
         for (int i = 0; i < 6; ++i) {
@@ -36,23 +41,23 @@ public class Dice : MonoBehaviour
 	}
 
 	public IEnumerator Roll() {
+        spriteRenderer.enabled = true;
         for (int i = 0; i < rollAmount; ++i) {
             SetActiveSide(Random.Range(0, 6));
             yield return new WaitForSeconds(rollInterval);
         }
+        description.enabled = true;
 	}
 
     private void SetActiveSide(int index) {
         currentSide = sides[index];
         spriteRenderer.sprite = currentSide.modifierVisual;
+        description.text = currentSide.name;
     }
-
-    public void Show () {
-        spriteRenderer.enabled = true;
-	}
 
     public void Hide() {
         spriteRenderer.enabled = false;
+        description.enabled = false;
 	}
 
     public ModifiersData GetCurrentSide() {
