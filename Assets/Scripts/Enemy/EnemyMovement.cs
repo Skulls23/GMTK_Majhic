@@ -9,6 +9,8 @@ public class EnemyMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private UnitStats   unitStats;
+    private Vector3 positionOnScreen;
+    bool isFirstDirection = true;
 
 
     private void Awake()
@@ -19,9 +21,10 @@ public class EnemyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+        positionOnScreen = Camera.main.WorldToScreenPoint(transform.position);
 
-        if (screenPos.x < Screen.width && screenPos.x > 0 && screenPos.y < Screen.height && screenPos.y > 0)
+        if ((positionOnScreen.x < Screen.width && positionOnScreen.x > 0 && positionOnScreen.y < Screen.height && positionOnScreen.y > 0) ||
+            enemyCode != "Agressive1")
         {
             //We will define the type of movement dependant of the type of the enemy
             switch (enemyCode)
@@ -45,8 +48,10 @@ public class EnemyMovement : MonoBehaviour
                 case "Passive3"  : //Try to be on Player's path
                     break;
                 case "Passive4X" : //Move on X
+                    Passive4('x');
                     break;
                 case "Passive4Y" : //Move on Y
+                    Passive4('y');
                     break;
 
             }
@@ -55,18 +60,6 @@ public class EnemyMovement : MonoBehaviour
         {
             print("Here will be the bouncing effet");
             rb.velocity = Vector3.zero;
-        }
-        else
-        {
-            rb.velocity = Vector3.zero;
-            if (screenPos.x >= Screen.width)
-                transform.position = new Vector3(transform.position.x - 0.05f, transform.position.y, 0);
-            else if (screenPos.x <= 0)
-                transform.position = new Vector3(transform.position.x + 0.05f, transform.position.y, 0);
-            else if (screenPos.y >= Screen.height)
-                transform.position = new Vector3(transform.position.x, transform.position.y - 0.05f, 0);
-            else if (screenPos.y >= 0)
-                transform.position = new Vector3(transform.position.x, transform.position.y + 0.05f, 0);
         }
     }
 
@@ -79,6 +72,39 @@ public class EnemyMovement : MonoBehaviour
     {
         RotateTowardTarget(player);
         rb.velocity = transform.right * unitStats.MaximumMoveSpeed;
+    }
+
+    private void Passive4(char axis)
+    {
+        print(positionOnScreen);
+        print(Screen.width);
+        if (axis == 'x')
+        {
+            if(positionOnScreen.x >= Screen.width)
+                isFirstDirection = false;
+            else if(positionOnScreen.x <= 0)
+                isFirstDirection = true;
+            
+            
+            if(isFirstDirection)
+                rb.velocity = Vector2.right * unitStats.MaximumMoveSpeed;
+            else
+                rb.velocity = Vector2.left * unitStats.MaximumMoveSpeed;
+        }
+        else
+        {
+            if (positionOnScreen.y >= Screen.height)
+                isFirstDirection = false;
+            else if (positionOnScreen.y <= 0)
+                isFirstDirection = true;
+
+            print(isFirstDirection);
+
+            if (isFirstDirection)
+                rb.velocity = Vector2.up * unitStats.MaximumMoveSpeed;
+            else
+                rb.velocity = Vector2.down * unitStats.MaximumMoveSpeed;
+        }
     }
 
     private void RotateTowardTarget(GameObject target)
