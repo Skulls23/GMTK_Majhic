@@ -35,6 +35,12 @@ public class ModifierManager : MonoBehaviour
         // on stuff when a unit die
     }
 
+    public void AddModifier(ModifiersData mod) {
+        if (mod.targetToApply.Contains(ModifiersData.TargetToApply.Player)) AddPlayerModifier(mod);
+        if (mod.targetToApply.Contains(ModifiersData.TargetToApply.Enemy)) AddEnemiesModifier(mod);
+        if (mod.targetToApply.Contains(ModifiersData.TargetToApply.Enemy)) throw new Exception("Global Modifiers not implemented");
+	}
+
     public void AddPlayerModifier(ModifiersData mod)
     {
         playerModifierList.Add(mod);

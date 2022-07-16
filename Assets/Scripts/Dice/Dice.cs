@@ -7,24 +7,26 @@ public class Dice : MonoBehaviour
     private static float rollInterval = 0.1f;
     private static float rollAmount = 10;
 
-    private List<DiceSide> sides;
+    private List<ModifiersData> sides;
     private SpriteRenderer spriteRenderer;
 
-    private DiceSide currentSide;
+    private ModifiersData currentSide;
+
+    private bool isRolling;
 
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        sides = new List<DiceSide>();
+        sides = new List<ModifiersData>();
         for (int i = 0; i < 6; ++i) {
-            sides.Add(new DiceSide("DiceSideBlank", "Blank", "NO DESCRIPTION"));
+            if (i % 2 == 0)
+                sides.Add(Resources.Load<ModifiersData>("Scriptqble/PlayerAttackSpeed"));
+            else
+                sides.Add(Resources.Load<ModifiersData>("Scriptqble/TestModifier"));
 		}
-
-        for(int i = 0; i < 6; ++i) {
-            SetSide(i, new DiceSide("DiceSide" + (i + 1), (i+1).ToString(), "NO DESCRIPTION"));
-		}
+        isRolling = false;
         Roll();
     }
 
@@ -33,20 +35,27 @@ public class Dice : MonoBehaviour
     /// </summary>
     /// <param name="index">The side to override</param>
     /// <param name="side">The new side</param>
-    public void SetSide(int index, DiceSide side) {
+    public void SetSide(int index, ModifiersData side) {
         sides[index] = side;
 	}
 
-	void Roll() {
+	public void Roll() {
         StartCoroutine(RollDiceCoroutine());
 	}
 
     private IEnumerator RollDiceCoroutine() {
+        isRolling = true;
         for (int i = 0; i < rollAmount; ++i) {
             currentSide = sides[Random.Range(1, 6)];
-            spriteRenderer.sprite = currentSide.sprite;
+            spriteRenderer.sprite = currentSide.modifierVisual;
             yield return new WaitForSeconds(rollInterval);
         }
-        Debug.Log("DICE RESULT IS : " + currentSide.name);
+        ModifierManager.Instance.AddModifier(currentSide);
+        Debug.Log("DICE RESULT IS : " + currentSide.modifierDisplayName);
+        isRolling = false;
+	}
+
+    public bool GetIsRolling() {
+        return isRolling;
 	}
 }
