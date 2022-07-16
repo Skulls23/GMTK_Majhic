@@ -44,8 +44,11 @@ public class EnemyMovement : MonoBehaviour
                     break;
                 case "Passive3"  : //Try to be on Player's path
                     break;
-                case "Passive4"  : //Move on X or Y axis only
+                case "Passive4X" : //Move on X
                     break;
+                case "Passive4Y" : //Move on Y
+                    break;
+
             }
         }
         else if (enemyCode == "Agressive1")
@@ -65,7 +68,6 @@ public class EnemyMovement : MonoBehaviour
             else if (screenPos.y >= 0)
                 transform.position = new Vector3(transform.position.x, transform.position.y + 0.05f, 0);
         }
-        
     }
 
     private void Agressive1()
