@@ -103,4 +103,20 @@ public class CharacterMovement : MonoBehaviour
         }
         isVerticalCoroutineRunning = false;
     }
+
+    /////////////////////////
+    /// GETTERS & SETTERS ///
+    /////////////////////////
+    
+    public float Speed
+    {
+        get { return speed; }
+        set { speed = value; }
+    }
+
+    public float SlidingTime
+    {
+        get { return slidingTime; }
+        set { slidingTime = value; }
+    }
 }
