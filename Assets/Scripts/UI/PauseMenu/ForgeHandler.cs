@@ -9,14 +9,12 @@ public class ForgeHandler : MonoBehaviour
     [Header("Containers")]
     public GameObject diceContainer;
     public GameObject modifiersContainer;
-    public GameObject activeEffectsContainer;
     public GameObject descriptionContainer;
     public Button validateButton;
 
     [Header("Variable Texts")]
     public TextMeshProUGUI selectedModifierTitle;
     public TextMeshProUGUI selectedModifierDescription;
-    public TextMeshProUGUI activeEffectsList;
 
     void Start()
     {
@@ -64,11 +62,15 @@ public class ForgeHandler : MonoBehaviour
 
     public void DisplayModifierInfo(ModifiersData p_modifiersData, bool isSelectedForNextWave)
     {
-        if(isSelectedForNextWave)
+        if (isSelectedForNextWave)
             ModifierManager.Instance.currentForgeSelectedModifier = p_modifiersData;
+
+        validateButton.interactable = isSelectedForNextWave;
 
         selectedModifierTitle.text = p_modifiersData.modifierDisplayName;
         selectedModifierDescription.text = p_modifiersData.modifierDescription;
+
+
     }
 
     void SetupDiceFaces()
