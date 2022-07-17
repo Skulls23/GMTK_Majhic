@@ -31,9 +31,10 @@ public class CharacterShooter : MonoBehaviour
     {
         float angle = characterAimingScript.Angle;
 
+        GameObject go = Instantiate(bulletPrefab, firingPoint.position, Quaternion.Euler(new Vector3(0, 0, angle)));
+        go.GetComponent<PlayerBullet>().SetupBullet(unitStats);
+
         if(unitStats.onShoot != null)
-            unitStats.onShoot();
-            
-        Instantiate(bulletPrefab, firingPoint.position, Quaternion.Euler(new Vector3(0, 0, angle)));
+            unitStats.onShoot(go);
     }
 }

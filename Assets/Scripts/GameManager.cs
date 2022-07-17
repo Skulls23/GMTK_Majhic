@@ -26,12 +26,15 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartARound()
     {
+        UnitsManager.Instance.LockPlayer(false);
+        
         Debug.Log("[Start a Round] :: Round " + currentRound);
         //on attends 2-3 secondes avant d'envoyer la sauce
         StartCoroutine(CallCountDown(3));
         yield return new WaitForSeconds(3f);
 
         Debug.Log("[Launch Dice]");
+        UnitsManager.Instance.LockPlayer(true);
 
         // On lance un dé et on attends son résultat
         //lancer le dé et ajouter le résultat aprés le lancement et afficher une popup indiquant le résultat du dé choisis
@@ -43,6 +46,8 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("[Prepare Battle phase]");
         // Rétablir la scéne et le controle du personnage au joueur
+        UnitsManager.Instance.ResetPlayer();
+        UnitsManager.Instance.LockPlayer(false);
 
         //on attends 2-3 secondes avant d'envoyer la sauce
         StartCoroutine(CallCountDown(3));
@@ -63,10 +68,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("[Choose Modifier Phase]");
 
         // on display au joueur les modificateurs à choisir
+        UnitsManager.Instance.LockPlayer(true);
         UIManager.Instance.OpenForgePanel();
 
         //on attends qu il choisisse le modificateur et ait appuyé sur 'Pret'
         yield return new WaitUntil(()=> !UIManager.Instance.isForgeOpen);
+        UnitsManager.Instance.LockPlayer(false);
 
         Debug.Log("[Player Choosed Modifier] : Modifier Chosen = ?");
         Debug.Log("[Preparing Next round]");

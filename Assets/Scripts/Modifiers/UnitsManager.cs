@@ -83,4 +83,14 @@ public class UnitsManager : MonoBehaviour
         int rnd = Random.Range(0, spawnerPoints.Length);
         return spawnerPoints[rnd];
     }
+
+    public void LockPlayer(bool boo)
+    {
+        player.GetComponent<CharacterMovement>().Lock(boo);
+    }
+
+    public void ResetPlayer()
+    {
+        player.GetComponent<ModifierHandler>().SetupModifiers();
+    }
 }

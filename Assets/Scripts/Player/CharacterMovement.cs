@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    [SerializeField] private float slidingTime = 0.5f;
     private Rigidbody2D rb;
     private UnitStats unitStats;
 
@@ -16,6 +15,8 @@ public class CharacterMovement : MonoBehaviour
 
     private bool isHorizontalCoroutineRunning = false;
     private bool isVerticalCoroutineRunning = false;
+
+    private bool isLocked;
     
     private void Awake()
     {
@@ -31,6 +32,8 @@ public class CharacterMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(isLocked) return;
+
         VerifySlideValues();
         Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
 
@@ -85,7 +88,7 @@ public class CharacterMovement : MonoBehaviour
             if (horizontalSlideTimer < 0 && horizontalSlideTimer > -0.1 || horizontalSlideTimer > 0 && horizontalSlideTimer < 0.1) //used zhen you move from a direction to another one
                 horizontalSlideTimer = 0;
 
-            yield return new WaitForSeconds(slidingTime/10);
+            yield return new WaitForSeconds(unitStats.CurrentInertiaBonusIncrease/10);
         }
         isHorizontalCoroutineRunning = false;
     }
@@ -103,18 +106,21 @@ public class CharacterMovement : MonoBehaviour
             if (verticalSlideTimer < 0 && verticalSlideTimer > -0.1 || verticalSlideTimer > 0 && verticalSlideTimer < 0.1) //used zhen you move from a direction to another one
                 verticalSlideTimer = 0;
 
-            yield return new WaitForSeconds(slidingTime/10);
+            yield return new WaitForSeconds(unitStats.CurrentInertiaBonusIncrease/10);
         }
         isVerticalCoroutineRunning = false;
+    }
+
+    public void Lock(bool p_isLocked)
+    {
+        isLocked = p_isLocked;
+
+        if(p_isLocked)
+            rb.velocity = Vector2.zero;
     }
 
     /////////////////////////
     /// GETTERS & SETTERS ///
     /////////////////////////
 
-    public float SlidingTime
-    {
-        get { return slidingTime; }
-        set { slidingTime = value; }
-    }
 }

@@ -13,6 +13,12 @@ public class ModifierHandler : MonoBehaviour
 
     void Start()
     {
+        SetupModifiers();
+    }
+
+    public void SetupModifiers()
+    {
+        ResetStats();
         unitStats = GetComponent<UnitStats>();
         modifiersToApply = new List<ModifiersData>();
 
@@ -31,6 +37,22 @@ public class ModifierHandler : MonoBehaviour
             unitStats.onCreated();
     }
 
+    void ResetStats()
+    {
+        unitStats.HitPointBonusFlat = 0;
+        unitStats.HitPointBonusPercent = 1;
+
+        unitStats.MoveSpeedBonusFlat = 0;
+        unitStats.MoveSpeedBonusPercent = 1;
+
+        unitStats.InertiaBonusIncreasePercent = 1;
+
+        unitStats.BulletsBounceBonusFlat = 0;
+
+        unitStats.NbSecondsBetweenEachAtkBonusFlat = 0;
+        unitStats.NbSecondsBetweenEachAtkBonusPercent = 1;
+    }
+
     public void Subscription()
     {
         unitStats.onCreated -= ActionOnCreation;
@@ -46,6 +68,7 @@ public class ModifierHandler : MonoBehaviour
 
     public void ActionOnCreation()
     {
+        Debug.Log("<color=green>On Created</color>");
         List<ModifiersData> modifiersToDoOnCreation = modifiersToApply.FindAll(x => x.upgradeManifestation == ModifiersData.UpgradeManifestation.OnCreated);
         foreach (ModifiersData mod in modifiersToDoOnCreation)
         {
@@ -56,9 +79,9 @@ public class ModifierHandler : MonoBehaviour
         }
     }
 
-    public void ActionOnBulletShoot(/*bullet shot*/)
+    public void ActionOnBulletShoot(GameObject bullet)
     {
-        // a faire
+        
     }
 
     public void ActionOnBeingDead()
@@ -110,6 +133,7 @@ public class ModifierHandler : MonoBehaviour
     public void ChangeUnitStat(ActionModifier actionModifier, string modifierName)
     {
         UnitStats whoToChangeStat = unitStats;
+        Debug.Log("########modify "+actionModifier.Arg1);
 
         // on récupére la property
 

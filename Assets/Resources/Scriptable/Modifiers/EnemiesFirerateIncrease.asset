@@ -22,7 +22,7 @@ MonoBehaviour:
   objectToCreatePrefab: []
   actionModifierList:
   - action: 1
-    Arg1: FirerateBonusPercent
+    Arg1: NbSecondsBetweenEachAtkBonusPercent
     Arg2: 40%
     Arg3: 
     Arg4: 

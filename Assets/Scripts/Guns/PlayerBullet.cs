@@ -9,19 +9,23 @@ public class PlayerBullet : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    private int amountOfBounceRemaining;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate()
+    public void SetupBullet(UnitStats unitStats)
     {
+        amountOfBounceRemaining = unitStats.CurrentBulletsBounceBonus;
         rb.velocity = transform.right * speed;
     }
 
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "Bullet")
+        if (collider.gameObject.tag == "Enemy")
         {
             if(collider.gameObject.CompareTag("Enemy"))
             {
@@ -34,7 +38,20 @@ public class PlayerBullet : MonoBehaviour
                     health.Hit(damage);
                 }
             }
+            Debug.Log("Destroy");
             Destroy(gameObject);
+        }
+        else if (collider.gameObject.tag == "Wall" || collider.gameObject.tag == "Bullet")
+        {
+            if(amountOfBounceRemaining > 0)
+            {
+                amountOfBounceRemaining --;
+                rb.velocity = (transform.right * speed) * (amountOfBounceRemaining%2 == 0 ? 1 : -1);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

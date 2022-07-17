@@ -80,6 +80,49 @@ public class UnitStats : MonoBehaviour
         }
     }
     #endregion
+    #region BulletBounce
+    public int startingBounceAmount = 0;
+    private int _bulletsBounceBonusFlat = 0;
+    public int BulletsBounceBonusFlat
+    {
+        get { return _bulletsBounceBonusFlat; }
+        set { _bulletsBounceBonusFlat = value; }
+    }
+
+    public int CurrentBulletsBounceBonus
+    {
+        get
+        {
+            return (int)((startingBounceAmount + BulletsBounceBonusFlat));
+        }
+    }
+    #endregion
+    #region Weapon speed
+    public float startingInertia = 2;
+
+    private float _inertiaBonusIncreasePercent = 1.0f;
+    public float InertiaBonusIncreasePercent
+    {
+        get { return _inertiaBonusIncreasePercent; }
+        set
+        {
+            _inertiaBonusIncreasePercent = value;
+        }
+    }
+    public float CurrentInertiaBonusIncrease
+    {
+        get
+        {
+            return (float)((startingInertia) * InertiaBonusIncreasePercent);
+        }
+    }
+
+    public void DamageAllEnemies()
+    {
+        Debug.Log("<color=red>DAMAGE ALL ENNEMIES</color>");
+    }
+
+    #endregion
 
     public delegate void OnCreated();
     public OnCreated onCreated;
@@ -88,6 +131,6 @@ public class UnitStats : MonoBehaviour
 
     public delegate void OnTakeDamage(int amount, Vector3 attackPos);
     public OnTakeDamage onTakeDamage;
-    public delegate void OnShoot();
+    public delegate void OnShoot(GameObject bullet);
     public OnShoot onShoot;
 }

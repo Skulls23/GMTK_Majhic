@@ -6,11 +6,11 @@ public class EnemyDistantAttack : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject firingPoint;
-    [SerializeField] private float      distanceMaxToAttack;
+    [SerializeField] private float distanceMaxToAttack;
 
-    private UnitStats  unitStats;
+    private UnitStats unitStats;
     private GameObject bulletPrefab;
-    private float      timeUntilNextShot;
+    private float timeUntilNextShot;
 
     private void Awake()
     {
@@ -34,12 +34,12 @@ public class EnemyDistantAttack : MonoBehaviour
 
     private void Shoot()
     {
-        if (unitStats.onShoot != null)
-            unitStats.onShoot();
-
         Vector3 direction = Camera.main.WorldToScreenPoint(player.transform.position) - Camera.main.WorldToScreenPoint(transform.position);
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        Instantiate(bulletPrefab, firingPoint.transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
+        GameObject go = Instantiate(bulletPrefab, firingPoint.transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
+
+        if (unitStats.onShoot != null)
+            unitStats.onShoot(go);
     }
 }
