@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc690f29ff5e0df44a86f799c6b8e39b, type: 3}
   m_Name: EnemiesAddAgressiveFive
   m_EditorClassIdentifier: 
-  modifierDisplayName: Five Finger Deathly Enemy
-  numberOfWaveBeforeSpawning: 16
-  modifierVisual: {fileID: 21300000, guid: 9aec8f31bb6cf2046ab4f0bfd7cd5894, type: 3}
+  modifierDisplayName: Add 2 Type One Enemy
+  numberOfWaveBeforeSpawning: 3
+  modifierVisual: {fileID: 0}
   replacementPriority: 0
-  modifierDescription: Add a level five agressive enemy to the fight
+  modifierDescription: 
   targetToApply: 02000000
   upgradeManifestation: 0
   objectToCreatePrefab:

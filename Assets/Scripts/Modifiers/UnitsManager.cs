@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,7 @@ public class UnitsManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;   
+        Instance = this;
     }
 
     public void Init()
@@ -37,33 +38,43 @@ public class UnitsManager : MonoBehaviour
 
     void CreateEnemies()
     {
-        List<ModifiersData> modifiers = ModifierManager.Instance.GetAllWorldModifier().FindAll(x=>x.upgradeManifestation == ModifiersData.UpgradeManifestation.OnCreated);
-        foreach(ModifiersData mod in modifiers)
+        List<ModifiersData> modifiers = ModifierManager.Instance.GetAllWorldModifier().FindAll(x => x.upgradeManifestation == ModifiersData.UpgradeManifestation.OnCreated);
+        float i = 0;
+        foreach (ModifiersData mod in modifiers)
         {
-            CreateEnemy(mod);
+            CreateEnemy(mod, i);
+            i += 0.75f;
         }
     }
 
-    void CreateEnemy(ModifiersData mod)
+    void CreateEnemy(ModifiersData mod, float waitTime)
     {
-        foreach(ActionModifier action in mod.actionModifierList)
+        foreach (ActionModifier action in mod.actionModifierList)
         {
-            if(action.action == ActionModifier.Action.Create)
-            {   
-                Transform tf = GetRandomSpawner();
-                GameObject go = Instantiate(mod.objectToCreatePrefab[0], tf.position, Quaternion.identity);
-                go.transform.SetParent(enemyParent);
-                amountOfRemainingEnemy ++;
+            if (action.action == ActionModifier.Action.Create)
+            {
+                amountOfRemainingEnemy++;
+                waitTime += 0.25f;
+                StartCoroutine(CreateEnemyCoroutine(mod, waitTime));
             }
         }
     }
 
+    IEnumerator CreateEnemyCoroutine(ModifiersData mod, float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        Transform tf = GetRandomSpawner();
+        GameObject go = Instantiate(mod.objectToCreatePrefab[0], tf.position, Quaternion.identity);
+        go.transform.SetParent(enemyParent);
+    }
+
+
     public void KillUnit(CharacterHealth character)
     {
-        if(character.gameObject.CompareTag("Enemy"))
+        if (character.gameObject.CompareTag("Enemy"))
         {
             Destroy(character.gameObject);
-            amountOfRemainingEnemy --;
+            amountOfRemainingEnemy--;
         }
     }
 

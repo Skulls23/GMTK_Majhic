@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2343512728016223071}
   - component: {fileID: 8444088166458615281}
   - component: {fileID: 5063569029022305288}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Agressive2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9022627929610859360}
   - component: {fileID: 7947255900269011725}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Circle
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7846281950898261876}
   - component: {fileID: 7846281950898261877}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BulletTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

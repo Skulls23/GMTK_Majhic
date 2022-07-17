@@ -12,6 +12,8 @@ public class EnemyMovement : MonoBehaviour
     private Vector3 positionOnScreen;
     bool isFirstDirection = true;
 
+    private Vector2 direction;
+
 
     private void Awake()
     {
@@ -22,6 +24,7 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         player = UnitsManager.Instance.player;
+        direction = Vector2.one;
     }
 
     void FixedUpdate()
@@ -64,13 +67,14 @@ public class EnemyMovement : MonoBehaviour
         else if (enemyCode == "Agressive1")
         {
             print("Here will be the bouncing effet");
-            rb.velocity = Vector3.zero;
+            direction.x *= -1;
+            Agressive1();
         }
     }
 
     private void Agressive1()
     {
-        rb.velocity = transform.right * unitStats.MaximumMoveSpeed;
+        rb.velocity = transform.right * unitStats.MaximumMoveSpeed * direction;
     }
 
     private void Agressive2()

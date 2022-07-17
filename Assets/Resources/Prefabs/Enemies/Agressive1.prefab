@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1117808128}
   - component: {fileID: 1117808129}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BulletTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -57,7 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1285011956318657044}
   - component: {fileID: 191901054924786297}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Circle
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 3908741336899637462}
   - component: {fileID: 1859136373401947269}
   - component: {fileID: 4322680894063898067}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Agressive1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -285,7 +285,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7063831114582320224}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FiringPoint
   m_TagString: Enemy
   m_Icon: {fileID: 0}

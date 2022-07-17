@@ -34,8 +34,6 @@ public class PlayerBullet : MonoBehaviour
                     health.Hit(damage);
                 }
             }
-            Debug.Log("hit");
-
             Destroy(gameObject);
         }
     }
