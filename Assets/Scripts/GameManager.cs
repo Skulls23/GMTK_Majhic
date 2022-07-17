@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameObject countDown;
     public TextMeshProUGUI countDownText;
-    private int currentRound = 1;
+    public int currentRound = 1;
     public Dice dice;
 
     void Awake()
@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     IEnumerator StartARound()
     {
         Debug.Log("[Start a Round] :: Round " + currentRound);
+        UIManager.Instance.UpdateRoundText();
         //on attends 2-3 secondes avant d'envoyer la sauce
         StartCoroutine(CallCountDown(3));
         yield return new WaitForSeconds(3f);

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc690f29ff5e0df44a86f799c6b8e39b, type: 3}
   m_Name: StarterEnemyAgressiveOne
   m_EditorClassIdentifier: 
-  modifierDisplayName: Spawn passive Enemy
+  modifierDisplayName: Spawn Agressive One Enemy
   numberOfWaveBeforeSpawning: 0
   modifierVisual: {fileID: 21300000, guid: 9aec8f31bb6cf2046ab4f0bfd7cd5894, type: 3}
   replacementPriority: 0
-  modifierDescription: Spawn a Passive Enemy
+  modifierDescription: Spawn an Agressive Enemy
   targetToApply: 02000000
   upgradeManifestation: 0
   objectToCreatePrefab:
