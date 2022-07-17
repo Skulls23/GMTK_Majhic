@@ -7,6 +7,7 @@ public class Dice : MonoBehaviour
 {
     private static float rollInterval = 0.1f;
     private static float rollAmount = 10;
+    public ModifiersData[] starters;
 
     private List<ModifiersData> sides;
     private Image spriteRenderer;
@@ -23,11 +24,9 @@ public class Dice : MonoBehaviour
         Hide();
 
         sides = new List<ModifiersData>();
-        for (int i = 0; i < 6; ++i) {
-            if (i % 2 == 0)
-                sides.Add(Resources.Load<ModifiersData>("Scriptqble/PlayerAttackSpeed"));
-            else
-                sides.Add(Resources.Load<ModifiersData>("Scriptqble/TestModifier"));
+        for (int i = 0; i < 6; ++i) 
+        {
+            sides.Add(starters[i]);
 		}
     }
 

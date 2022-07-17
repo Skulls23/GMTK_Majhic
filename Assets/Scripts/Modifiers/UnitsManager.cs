@@ -5,7 +5,6 @@ using UnityEngine;
 public class UnitsManager : MonoBehaviour
 {
     public static UnitsManager Instance;
-
     public int maxEnemyAmountOnScreen;
     public delegate void OnUnitDeath();
     public OnUnitDeath onUnitDeath;
@@ -13,6 +12,7 @@ public class UnitsManager : MonoBehaviour
     public List<GameObject> enemyToCreateEachWave;
     public int amountOfRemainingEnemy;
     public Transform enemyParent;
+    public Transform[] spawnerPoints;
 
 
     void Awake()
@@ -33,7 +33,6 @@ public class UnitsManager : MonoBehaviour
     public void StartWave()
     {
         CreateEnemies();
-
     }
 
     void CreateEnemies()
@@ -61,6 +60,7 @@ public class UnitsManager : MonoBehaviour
 
     Transform GetRandomSpawner()
     {
-        return transform;
+        int rnd = Random.Range(0, spawnerPoints.Length);
+        return spawnerPoints[rnd];
     }
 }

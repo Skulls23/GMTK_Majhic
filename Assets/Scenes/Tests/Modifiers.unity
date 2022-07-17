@@ -410,6 +410,12 @@ MonoBehaviour:
   enemyToCreateEachWave: []
   amountOfRemainingEnemy: 0
   enemyParent: {fileID: 1833611687}
+  spawnerPoints:
+  - {fileID: 1844054817}
+  - {fileID: 2147365962}
+  - {fileID: 331581306}
+  - {fileID: 446005313}
+  - {fileID: 1696572128}
 --- !u!1 &652499013
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,6 +1334,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dice
       objectReference: {fileID: 0}
+    - target: {fileID: 7054140578157438419, guid: a53f2195bd0523a4689d596989783275, type: 3}
+      propertyPath: starters.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7054140578157438419, guid: a53f2195bd0523a4689d596989783275, type: 3}
+      propertyPath: starters.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: d84b161c5c462ae4fbdd3b5d619781a4, type: 2}
+    - target: {fileID: 7054140578157438419, guid: a53f2195bd0523a4689d596989783275, type: 3}
+      propertyPath: starters.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: d84b161c5c462ae4fbdd3b5d619781a4, type: 2}
+    - target: {fileID: 7054140578157438419, guid: a53f2195bd0523a4689d596989783275, type: 3}
+      propertyPath: starters.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: d84b161c5c462ae4fbdd3b5d619781a4, type: 2}
+    - target: {fileID: 7054140578157438419, guid: a53f2195bd0523a4689d596989783275, type: 3}
+      propertyPath: starters.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: eefde8e2ca669c94baa9f156083d354d, type: 2}
+    - target: {fileID: 7054140578157438419, guid: a53f2195bd0523a4689d596989783275, type: 3}
+      propertyPath: starters.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: eefde8e2ca669c94baa9f156083d354d, type: 2}
+    - target: {fileID: 7054140578157438419, guid: a53f2195bd0523a4689d596989783275, type: 3}
+      propertyPath: starters.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: eefde8e2ca669c94baa9f156083d354d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a53f2195bd0523a4689d596989783275, type: 3}
 --- !u!1 &1497755906
