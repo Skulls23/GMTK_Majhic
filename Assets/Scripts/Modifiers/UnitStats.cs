@@ -5,7 +5,7 @@ using UnityEngine;
 public class UnitStats : MonoBehaviour
 {
     #region Hitpoints health
-    public int startingHitPoint;
+    public int startingHitPoint = 3;
     private int _hitPointBonusFlat;
     public int HitPointBonusFlat
     {
@@ -30,7 +30,7 @@ public class UnitStats : MonoBehaviour
 
     #endregion
     #region Movement speed
-    public float startingMoveSpeed;
+    public float startingMoveSpeed = 15f;
 
     private float _moveSpeedBonusFlat;
     public float MoveSpeedBonusFlat
@@ -55,28 +55,28 @@ public class UnitStats : MonoBehaviour
 
     #endregion
     #region Weapon speed
-    public float startingNbAtkPerSecond;
-    private float _nbAtkPerSecondBonusFlat = 0.0f;
-    public float NbAtkPerSecondBonusFlat
+    public float startingDelayBetweenAtk = 0.5f;
+    private float _nbSecondsBetweenEachAtkBonusFlat = 0.0f;
+    public float NbSecondsBetweenEachAtkBonusFlat
     {
-        get { return _nbAtkPerSecondBonusFlat; }
-        set { _nbAtkPerSecondBonusFlat = value; }
+        get { return _nbSecondsBetweenEachAtkBonusFlat; }
+        set { _nbSecondsBetweenEachAtkBonusFlat = value; }
     }
 
-    private float _nbAtkPerSecondBonusPercent = 1.0f;
-    public float NbAtkPerSecondBonusPercent
+    private float _nbSecondsBetweenEachAtkBonusPercent = 1.0f;
+    public float NbSecondsBetweenEachAtkBonusPercent
     {
-        get { return _nbAtkPerSecondBonusPercent; }
+        get { return _nbSecondsBetweenEachAtkBonusPercent; }
         set
         {
-            _nbAtkPerSecondBonusPercent = value;
+            _nbSecondsBetweenEachAtkBonusPercent = value;
         }
     }
-    public float CurrentNbAtkPerSecond
+    public float CurrentNbSecondsBetweenEachAtk
     {
         get
         {
-            return (float)((startingNbAtkPerSecond + NbAtkPerSecondBonusFlat) * NbAtkPerSecondBonusPercent);
+            return (float)((startingDelayBetweenAtk + NbSecondsBetweenEachAtkBonusFlat) * NbSecondsBetweenEachAtkBonusPercent);
         }
     }
     #endregion

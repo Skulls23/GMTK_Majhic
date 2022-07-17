@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CharacterShooter : MonoBehaviour
 {
-    //[SerializeField] private float fireRate = 0.5f;
     [SerializeField] private Transform firingPoint;
 
     private CharacterAiming characterAimingScript;
@@ -14,7 +13,7 @@ public class CharacterShooter : MonoBehaviour
 
     private void Awake()
     {
-        bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
+        bulletPrefab = Resources.Load<GameObject>("Prefabs/Player Bullet");
         characterAimingScript = GetComponent<CharacterAiming>();
         unitStats = GetComponent<UnitStats>();
     }
@@ -24,7 +23,7 @@ public class CharacterShooter : MonoBehaviour
         if (Input.GetMouseButton(0) && timeUntilNextShot < Time.time)
         {
             Shoot();
-            timeUntilNextShot = Time.time + unitStats.CurrentNbAtkPerSecond;
+            timeUntilNextShot = Time.time + unitStats.CurrentNbSecondsBetweenEachAtk;
         }
     }
 
