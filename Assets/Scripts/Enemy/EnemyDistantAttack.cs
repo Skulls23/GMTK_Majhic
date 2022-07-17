@@ -18,6 +18,11 @@ public class EnemyDistantAttack : MonoBehaviour
         unitStats = GetComponent<UnitStats>();
     }
 
+    void Start()
+    {
+        player = UnitsManager.Instance.player;
+    }
+
     private void Update()
     {
         if (Vector3.Distance(transform.position, player.transform.position) < distanceMaxToAttack && timeUntilNextShot < Time.time)

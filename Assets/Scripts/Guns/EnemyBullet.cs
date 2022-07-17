@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyBullet : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
-    [SerializeField] private float damage = 1;
+    [SerializeField] private int damage = 1;
 
     private Rigidbody2D rb;
 
@@ -19,10 +19,23 @@ public class EnemyBullet : MonoBehaviour
         rb.velocity = transform.right * speed;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.collider.tag == "Player" || collision.collider.tag == "Bullet")
+        if (collider.gameObject.tag == "Player" || collider.gameObject.tag == "Bullet")
+        {
+            if(collider.gameObject.CompareTag("Player"))
+            {
+                if(collider.gameObject.TryGetComponent<UnitStats>(out UnitStats stats))
+                {
+                    stats.onTakeDamage(damage, transform.position);
+                }
+                if(collider.gameObject.TryGetComponent<CharacterHealth>(out CharacterHealth health))
+                {
+                    health.Hit(damage);
+                }
+            }
             Destroy(gameObject);
+        }
     }
 
     private void OnBecameInvisible()

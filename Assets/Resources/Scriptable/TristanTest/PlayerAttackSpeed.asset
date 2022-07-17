@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc690f29ff5e0df44a86f799c6b8e39b, type: 3}
   m_Name: PlayerAttackSpeed
   m_EditorClassIdentifier: 
-  modifierDisplayName: player attack speed
+  modifierDisplayName: player movement speed --
   numberOfWaveBeforeSpawning: 0
   modifierVisual: {fileID: 21300000, guid: ef1ab4d000d8b7647971e272361c6a55, type: 3}
   replacementPriority: 0

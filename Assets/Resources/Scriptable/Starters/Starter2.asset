@@ -20,7 +20,7 @@ MonoBehaviour:
   targetToApply: 02000000
   upgradeManifestation: 0
   objectToCreatePrefab:
-  - {fileID: 1272462834042891774, guid: 7f71e9a63fad9da44a9b0e3c5e61ef4a, type: 3}
+  - {fileID: 8655042978003322201, guid: 833d37793546f8b4e8ea0d46dd75607a, type: 3}
   actionModifierList:
   - action: 0
     Arg1: 1

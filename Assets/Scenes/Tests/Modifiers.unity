@@ -406,6 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9b42833feeb7a747aa4bfe95771afa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 957996552}
   maxEnemyAmountOnScreen: 0
   enemyToCreateEachWave: []
   amountOfRemainingEnemy: 0
@@ -724,8 +725,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHitPoint: 0
-  startingMoveSpeed: 15
-  startingNbAtkPerSecond: 0.5
+  startingMoveSpeed: 5
+  startingDelayBetweenAtk: 0.5
 --- !u!114 &957996560
 MonoBehaviour:
   m_ObjectHideFlags: 0

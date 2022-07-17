@@ -19,6 +19,11 @@ public class EnemyMovement : MonoBehaviour
         rb        = GetComponent<Rigidbody2D>();
     }
 
+    void Start()
+    {
+        player = UnitsManager.Instance.player;
+    }
+
     void FixedUpdate()
     {
         positionOnScreen = Camera.main.WorldToScreenPoint(transform.position);

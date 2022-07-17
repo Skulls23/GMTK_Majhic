@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UnitsManager : MonoBehaviour
 {
+    public GameObject player;
     public static UnitsManager Instance;
     public int maxEnemyAmountOnScreen;
     public delegate void OnUnitDeath();
@@ -13,7 +14,6 @@ public class UnitsManager : MonoBehaviour
     public int amountOfRemainingEnemy;
     public Transform enemyParent;
     public Transform[] spawnerPoints;
-
 
     void Awake()
     {
@@ -55,6 +55,15 @@ public class UnitsManager : MonoBehaviour
                 go.transform.SetParent(enemyParent);
                 amountOfRemainingEnemy ++;
             }
+        }
+    }
+
+    public void KillUnit(CharacterHealth character)
+    {
+        if(character.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(character.gameObject);
+            amountOfRemainingEnemy --;
         }
     }
 
