@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterHealth : MonoBehaviour
-{
+{   
+    [SerializeField]private Animator animator;
+    private int deathTriggerHash;
     void Start()
     {
+        deathTriggerHash = Animator.StringToHash("TriggerDeath");
         health = GetComponent<UnitStats>().MaximumHitPoint;
     }
     private float health;
@@ -26,6 +29,7 @@ public class CharacterHealth : MonoBehaviour
 
     public void Die()
     {
+        if(animator){ animator.SetTrigger(deathTriggerHash);}
         UnitsManager.Instance.KillUnit(this);
     }
 }

@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: -246609994344872357}
   - component: {fileID: 8806592709055738334}
   - component: {fileID: 5379121426201365796}
-  m_Layer: 6
-  m_Name: Passive1
+  m_Layer: 0
+  m_Name: Passive2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,7 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8227777822650705743}
   - component: {fileID: 7012794256536303394}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Circle
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7204554093963909979}
   - component: {fileID: 7204554093963909978}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: BulletTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

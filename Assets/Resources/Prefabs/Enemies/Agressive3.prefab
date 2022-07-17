@@ -10,13 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 6007778233313833939}
   - component: {fileID: 4871189953026198731}
+  - component: {fileID: 8774135353144734426}
   - component: {fileID: 7846281949849094443}
   - component: {fileID: 7846281949849094420}
   - component: {fileID: -2343512728016223071}
   - component: {fileID: 8444088166458615281}
   - component: {fileID: 5063569029022305288}
-  m_Layer: 6
-  m_Name: Agressive2
+  m_Layer: 0
+  m_Name: Agressive3
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,6 +36,7 @@ Transform:
   m_Children:
   - {fileID: 2843619858631619473}
   - {fileID: 9022627929610859360}
+  - {fileID: 7627323065180831403}
   - {fileID: 7846281950898261876}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -51,8 +53,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7588695f5c285094b98a7fcbf939476a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCode: 1
+  enemyCode: 2
   player: {fileID: 0}
+--- !u!114 &8774135353144734426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513055988836035629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 752877a7e77e1ce4a886c28d838cfa3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  firingPoint: {fileID: 2537255231443339648}
+  distanceMaxToAttack: 15
 --- !u!114 &7846281949849094443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +148,36 @@ CircleCollider2D:
   m_Offset: {x: -0.00000023841858, y: 0}
   serializedVersion: 2
   m_Radius: 0.15185523
+--- !u!1 &2537255231443339648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7627323065180831403}
+  m_Layer: 0
+  m_Name: FiringPoint
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7627323065180831403
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2537255231443339648}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.06, y: -0.285, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6007778233313833939}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4072998294364761425
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2843619858631619473}
   - component: {fileID: 8387455892723177930}
-  - component: {fileID: 963915072308950076}
+  - component: {fileID: 4059761697662078981}
   - component: {fileID: 930411146843545973}
   m_Layer: 0
   m_Name: Renderer
@@ -204,7 +251,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5c10c73eef4d99c4396df55650981375, type: 3}
+  m_Sprite: {fileID: -4458100411979618505, guid: 2f237876fc3f11e4691c932d863a87da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -215,7 +262,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &963915072308950076
+--- !u!114 &4059761697662078981
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -237,7 +284,7 @@ Animator:
   m_GameObject: {fileID: 4072998294364761425}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 68bb06897a9056d4ebad81b4a734768d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2e044914bc240614b86735bd7568e602, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -256,7 +303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9022627929610859360}
   - component: {fileID: 7947255900269011725}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Circle
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -338,7 +385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7846281950898261876}
   - component: {fileID: 7846281950898261877}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: BulletTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -357,7 +404,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6007778233313833939}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &7846281950898261877
 CircleCollider2D:
