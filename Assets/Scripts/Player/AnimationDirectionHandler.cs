@@ -6,6 +6,8 @@ public class AnimationDirectionHandler : MonoBehaviour
 {
     public string animationPrefix;
 
+    [Min(0.0f)] public float accuracy;
+
     private Rigidbody2D rb;
     private Animator animator;
 
@@ -15,7 +17,7 @@ public class AnimationDirectionHandler : MonoBehaviour
 	}
 
 	private void FixedUpdate() {
-        if (Mathf.Abs(rb.velocity.x) > Mathf.Abs(rb.velocity.y)) {
+        if (Mathf.Abs(rb.velocity.x) >= Mathf.Abs(rb.velocity.y)+accuracy) {
             animator.Play(animationPrefix + "_Left");
             if (rb.velocity.x > 0) {
                 transform.localScale = new Vector3(1, 1);
@@ -24,7 +26,7 @@ public class AnimationDirectionHandler : MonoBehaviour
                 transform.localScale = new Vector3(-1, 1);
             }
         }
-        else {
+        else if (Mathf.Abs(rb.velocity.x) < Mathf.Abs(rb.velocity.y)-accuracy) {
             if (rb.velocity.y > 0) animator.Play(animationPrefix + "_Up");
             else animator.Play(animationPrefix + "_Down");
         }
