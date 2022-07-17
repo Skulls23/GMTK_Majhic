@@ -824,7 +824,7 @@ MonoBehaviour:
   startingHitPoint: 0
   startingMoveSpeed: 5
   startingDelayBetweenAtk: 0.5
-  startingBounceAmount: 0
+  startingBounceAmount: 56
   startingInertia: 1
 --- !u!114 &957996560
 MonoBehaviour:
