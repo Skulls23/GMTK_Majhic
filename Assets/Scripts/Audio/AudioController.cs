@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UnityCore {
+namespace GrannyCore {
     namespace Audio {
 
         public class AudioController : MonoBehaviour
@@ -12,8 +12,8 @@ namespace UnityCore {
             public bool debugMode;
             public AudioTrack[] tracks;
 
-            private Dictionary<AudioType, AudioTrack> m_AudioDict; // relation [AudioType ; AudioClip]
-            private Dictionary<AudioType, IEnumerator> m_CoroutineDict; // [type d'audio ; Ienumerator]
+            private Dictionary<SoundType, AudioTrack> m_AudioDict; // relation [SoundType ; AudioClip]
+            private Dictionary<SoundType, IEnumerator> m_CoroutineDict; // [type d'audio ; Ienumerator]
 
             private enum AudioState {
                 START,
@@ -23,24 +23,24 @@ namespace UnityCore {
 
             [System.Serializable]
             public class AudioObject {
-                public AudioType type;
+                public SoundType type;
                 public AudioClip clip;
             }
             
             [System.Serializable]
             public class AudioTrack {
                 public AudioSource source;
-                public AudioObject[] audioArray;
+                public SoundScriptableObject[] audioArray; // AudioObject[]
             }
 
 
             private class AudioRoutine {
                 public AudioState state;
-                public AudioType type;
+                public SoundType type;
                 public bool fade;
                 public WaitForSeconds delay;
 
-                public AudioRoutine(AudioState _state, AudioType _type, bool _fade, float _delay) {
+                public AudioRoutine(AudioState _state, SoundType _type, bool _fade, float _delay) {
                     state = _state;
                     type = _type;
                     fade = _fade;
@@ -62,18 +62,18 @@ namespace UnityCore {
 
 #region  Public
             // Pas encore de possibilité de jouer un son localisé. Mais ça marche bien pour les sons généraux
-            public void PlayAudio(AudioType type, bool fade=false, float delay=0.0F){
+            public void PlayAudio(SoundType type, bool fade=false, float delay=0.0F){
                 AddRoutine(
                     new AudioRoutine(AudioState.START, type, fade, delay)
                 );
             }
-            public void StopAudio(AudioType type, bool fade=false, float delay=0.0F) {
+            public void StopAudio(SoundType type, bool fade=false, float delay=0.0F) {
                 AddRoutine(
                     new AudioRoutine(AudioState.STOP, type, fade, delay)
                 );
             }
 
-            public void RestartAudio(AudioType type, bool fade=false, float delay=0.0F) {
+            public void RestartAudio(SoundType type, bool fade=false, float delay=0.0F) {
                 AddRoutine(
                     new AudioRoutine(AudioState.RESTART, type, fade, delay)
                 );
@@ -84,13 +84,13 @@ namespace UnityCore {
 #region  Private
             private void Configure(){
                 instance = this;
-                m_AudioDict = new Dictionary<AudioType, AudioTrack>();
-                m_CoroutineDict = new Dictionary<AudioType, IEnumerator>();
+                m_AudioDict = new Dictionary<SoundType, AudioTrack>();
+                m_CoroutineDict = new Dictionary<SoundType, IEnumerator>();
                 GenerateAudioTable();
             }
             private void Dispose() {
                 // cancel all coroutines in progress
-                foreach(KeyValuePair<AudioType, IEnumerator> kvp in m_CoroutineDict) {
+                foreach(KeyValuePair<SoundType, IEnumerator> kvp in m_CoroutineDict) {
                     IEnumerator cor = kvp.Value;
                     StopCoroutine(cor);
                 }
@@ -105,7 +105,7 @@ namespace UnityCore {
                 Log("Starting Coroutine on ["+routine.type+"] with operation: "+routine.state);
             }
 
-            private void RemoveRoutine(AudioType type) {
+            private void RemoveRoutine(SoundType type) {
                 if (!m_CoroutineDict.ContainsKey(type)) {
                     Log("Trying to stop a Coroutine ["+type+"] that is not running.");
                     return;
@@ -115,25 +115,25 @@ namespace UnityCore {
                 m_CoroutineDict.Remove(type);
             }
 
-            private void RemoveConflictingRoutines(AudioType type) {
+            private void RemoveConflictingRoutines(SoundType type) {
                 // cancel the coroutine if one exists with the same type
                 if (m_CoroutineDict.ContainsKey(type)) {
                     RemoveRoutine(type);
                 }
 
                 // cancel coroutines that share the same audio track
-                AudioType conflictAudio = AudioType.None;
+                SoundType conflictAudio = SoundType.None;
                 AudioTrack audioTrackNeeded = GetAudioTrack(type, "Get Audio Track Needed");
 
-                foreach (KeyValuePair<AudioType, IEnumerator> entry in m_CoroutineDict) {
-                    AudioType audioType = (AudioType)entry.Key;
+                foreach (KeyValuePair<SoundType, IEnumerator> entry in m_CoroutineDict) {
+                    SoundType audioType = (SoundType)entry.Key;
                     AudioTrack audioTrackInUse = GetAudioTrack(audioType, "Get Audio Track In Use");
                     if (audioTrackInUse.source == audioTrackNeeded.source) {
                         conflictAudio = audioType;
                         break;
                     }
                 }
-                if (conflictAudio != AudioType.None) {
+                if (conflictAudio != SoundType.None) {
                     RemoveRoutine(conflictAudio);
                 }
             }
@@ -188,7 +188,8 @@ namespace UnityCore {
             }
             private void GenerateAudioTable(){                
                 foreach(AudioTrack track in tracks){
-                    foreach(AudioObject obj in track.audioArray){
+                    foreach(SoundScriptableObject obj in track.audioArray) // AudioObject
+                    {
                         // Check dupes
                         if(m_AudioDict.ContainsKey(obj.type)){
                             LogWarning("Can't register audio ["+obj.type+"]. It has already been registered.");
@@ -200,7 +201,7 @@ namespace UnityCore {
                 }
             }
 
-            private AudioTrack GetAudioTrack(AudioType type, string routineInfo="") {
+            private AudioTrack GetAudioTrack(SoundType type, string routineInfo="") {
                 if (!m_AudioDict.ContainsKey(type)) {
                     LogWarning("You are trying to <color=#fff>"+routineInfo+"</color> for ["+type+"] but no track was found supporting this audio type.");
                     return null;
@@ -208,8 +209,9 @@ namespace UnityCore {
                 return m_AudioDict[type];
             }
 
-            private AudioClip GetAudioClipFromAudioTrack(AudioType type, AudioTrack track) {
-                foreach (AudioObject obj in track.audioArray) {
+            private AudioClip GetAudioClipFromAudioTrack(SoundType type, AudioTrack track) {
+                foreach (SoundScriptableObject obj in track.audioArray) //AudioObject
+                {
                     if (obj.type == type) {
                         return obj.clip;
                     }

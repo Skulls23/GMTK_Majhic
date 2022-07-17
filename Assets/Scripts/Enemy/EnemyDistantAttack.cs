@@ -11,11 +11,15 @@ public class EnemyDistantAttack : MonoBehaviour
     private UnitStats  unitStats;
     private GameObject bulletPrefab;
     private float      timeUntilNextShot;
+    private Camera      cam;
 
     private void Awake()
     {
         bulletPrefab = Resources.Load<GameObject>("Prefabs/Enemy Bullet");
         unitStats = GetComponent<UnitStats>();
+    }
+    private void OnEnable() {
+        cam = Camera.main;
     }
 
     void Start()
@@ -37,7 +41,7 @@ public class EnemyDistantAttack : MonoBehaviour
         if (unitStats.onShoot != null)
             unitStats.onShoot();
 
-        Vector3 direction = Camera.main.WorldToScreenPoint(player.transform.position) - Camera.main.WorldToScreenPoint(transform.position);
+        Vector3 direction = cam.WorldToScreenPoint(player.transform.position) - cam.WorldToScreenPoint(transform.position);
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         Instantiate(bulletPrefab, firingPoint.transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));

@@ -299,16 +299,12 @@ MonoBehaviour:
   tracks:
   - source: {fileID: 1616338768}
     audioArray:
-    - type: 1
-      clip: {fileID: 8300000, guid: c2661be5c07d4494dbd9c6d67dcbba6c, type: 3}
-    - type: 2
-      clip: {fileID: 8300000, guid: 548a229c6d16c48459d1e1b5a37b007c, type: 3}
+    - {fileID: 11400000, guid: 8b1283b069ad60d48a7b90c852204d77, type: 2}
+    - {fileID: 11400000, guid: 81be8257aad327443a7e3555ae9311b8, type: 2}
   - source: {fileID: 281388269}
     audioArray:
-    - type: 3
-      clip: {fileID: 8300000, guid: 19d7b658ab88f944da3acf6347995444, type: 3}
-    - type: 4
-      clip: {fileID: 8300000, guid: df7267f8518d93749b4d73c219103161, type: 3}
+    - {fileID: 11400000, guid: 5aa190d68e858af4991bed681dcddfd7, type: 2}
+    - {fileID: 11400000, guid: 730414c439e85d1408a2f962fe18dcda, type: 2}
 --- !u!1 &1152078382
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,6 +335,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioController: {fileID: 875292609}
+  testType1: 1
+  testType2: 8
 --- !u!4 &1152078384
 Transform:
   m_ObjectHideFlags: 0
