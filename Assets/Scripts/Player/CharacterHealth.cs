@@ -12,8 +12,16 @@ public class CharacterHealth : MonoBehaviour
 
     public float Health
     {
-        get { return health; }
-        set { health = value; }
+        get { return GetComponent<UnitStats>().MaximumHitPoint; }
+        set
+        {
+            if (value < 9)
+                health = value;
+            else if (value >= 9)
+                health = 8;
+            else if(value <= 0)
+                Die();
+        }
     }
 
     public void Hit(int amount)
@@ -26,6 +34,6 @@ public class CharacterHealth : MonoBehaviour
 
     public void Die()
     {
-        UnitsManager.Instance.KillUnit(this);
+        Application.Quit();
     }
 }
